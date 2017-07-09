@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+    <link href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css" rel="stylesheet">
+
+    <link href="https://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js"></script>
+
+  </head>
+  <body>
+    <div data-role="page">
+    <style media="screen">
+      .ui-content{
+        position: absolute;
+        left: 8%;
+        top:10%;
+        width:75%;
+      }
+      #zhuce{
+        color: #fff;
+        background: #1AAD19;
+        font-weight: 100;
+      }
+      .ui-content h3{
+        text-align: center;
+      }
+    </style>
+
+      <div data-role="content">
+        <form action="/one" method="post">
+          <h3>来注册吧！</h3>
+          <div data-role="fieldcontain">
+            <input type="text" name="name" placeholder="账号" id="text-basic">
+
+            <input type="password" name="password" id="password" autocomplete="off" placeholder="密码">
+
+            <br>
+            <button type="submit" id="zhuce">注册</button>
+
+            <a href="/" method="get" data-role="button">回去登录</a>
+
+          </div>
+
+        </form>
+      </div>
+
+
+
+
+    </div>
+
+  </body>
+</html>

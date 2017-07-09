@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+    <link href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css" rel="stylesheet">
+
+    <link href="https://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js"></script>
+
+  </head>
+  <body>
+    <div data-role="page">
+    <style media="screen">
+      *{
+        margin:0;
+        padding:0;
+        box-sizing :border-box;
+      }
+      body{
+        font:13px Helvetica,Arial;
+      }
+      form{
+        /*background: #000;*/
+        padding:3px;
+        position:fixed;
+        bottom:0;
+        width:100%;
+      }
+      form input{
+        border: 0;
+        padding: 10px;
+        width: 90%;
+        margin-right: .5%;
+      }
+      #name{
+        border:1px solid green;
+      }
+      #m{
+        margin-top:5px;
+        border:1px solid red;
+      }
+      form button{
+        /*width: 9%; */
+        background: rgb(130, 224, 255);
+        /*border: none; */
+        padding: 10px;
+      }
+      #messages{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      #messages li {
+        padding:5px 10px;
+      }
+      #messages li:nth-child(odd) {
+        background:#eee;
+      }
+      i{
+        color:green;
+      }
+
+    </style>
+
+    <script>
+      var names;
+      var socket = io();
+
+      socket.on("connect", () => {
+        socket.emit("ferret", "tobi", (data) => {
+          // console.log(data);
+          // $('body').append('<h1>Welcome to New Chat!<i class="fa fa-send"></i></h1>');
+          //   setTimeout(() => {
+          //     $("h1").remove();
+          //   },5000);
+        });
+      });
+
+      $("form").submit(() => {
+        names = $("#name").val();
+        socket.emit("chat message", $("#m").val(), names);
+        $("#m").val("");
+        return false;
+      });
+      socket.on("chat message", (msg, name) => {
+        $("#messages").append($("<li>").text(msg + "----" + name).append($("<i class='fa fa-check fa-lg'></i>")));
+      });
+    </script>
+
+      <ul id="messages"></ul>
+      <form id="text" action="">
+        <div dta-role="fieldcontain">
+          <input id="name" autocomplete="off" placeholder="名字">
+          <input type="text" name="name" id="m" autocomplete="off" placeholder="内容">
+          <button type="submit">send</button>
+        </div>
+      </form>
+    </div>
+
+
+  </body>
+</html>
